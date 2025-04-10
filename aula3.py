@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import plotly.express as px
 
 # Carregar os nossos acidentes
 df_acidentes = pd.read_csv("./acidentes_2022.csv")
@@ -30,4 +31,12 @@ top5 = df_acidentes_por_cidade.head(5)
 # df_acidentes_por_cidade
 # Começando a montar o gráfico para exibição no Streamlit
 st.header("Top 5 cidades com mais acidentes de trânsito em Rondônia")
-st.bar_chart(top5.set_index('municipio')['total_acidentes'])
+# st.bar_chart(top5.set_index('municipio')['total_acidentes'])
+fig = px.bar(
+    top5,
+    x='municipio',
+    y='total_acidentes',
+    labels={'municipio': "Municípios de Rondônia", 'total_acidentes': 'Acidentes' }
+)
+
+st.plotly_chart(fig)
