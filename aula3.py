@@ -25,6 +25,9 @@ df_acidentes_por_cidade = pd.merge(
 # Ordenação dos municípios pela quantidade de acidentes
 df_acidentes_por_cidade.sort_values(by='total_acidentes', ascending=False, inplace=True)
 
+top5 = df_acidentes_por_cidade.head(5)
+
 # df_acidentes_por_cidade
 # Começando a montar o gráfico para exibição no Streamlit
 st.header("Top 5 cidades com mais acidentes de trânsito em Rondônia")
+st.bar_chart(top5.set_index('municipio')['total_acidentes'])
